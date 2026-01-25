@@ -1,0 +1,87 @@
+/* pywal colors */
+@import url("/home/gustavo/.cache/wal/colors-waybar.css");
+
+/* Global */
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 10.5px;
+    border-radius: 0;
+    min-height: 0;
+    font-weight: bold;
+}
+
+/* Bar background */
+window#waybar {
+    background-color: @background;
+}
+
+/* Module containers */
+#workspaces,
+#clock,
+#network,
+#pulseaudio,
+#battery {
+    background: transparent;
+    color: @foreground;
+    padding: 2px 8px;
+    font-weight: bold;
+}
+
+/* Workspace buttons — NO BOX */
+#workspaces button {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0 6px;
+    margin: 0;
+    color: @color8;
+    /* inactive */
+    font-weight: bold;
+}
+
+/* Active workspace — number only */
+#workspaces button.active {
+    color: @color1;
+    font-weight: 900;
+}
+
+/* Occupied workspace */
+#workspaces button.occupied {
+    color: @color6;
+}
+
+/* Empty workspace */
+#workspaces button.empty {
+    color: @color8;
+}
+
+/* Hover — number only, no box */
+#workspaces button:hover {
+    background: transparent;
+    color: @foreground;
+}
+
+/* Empty workspace that is active — special color */
+#workspaces button.empty.active {
+    color: @color3;
+    /* e.g., greenish from pywal */
+    font-weight: 700;
+}
+
+/* Prevent Waybar from adding weird focus styles */
+#workspaces button:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* Other modules hover */
+#clock:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover {
+    color: @foreground;
+}
+
+#backlight {
+  transition: color 0.2s, opacity 0.2s;
+}

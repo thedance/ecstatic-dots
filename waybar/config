@@ -1,0 +1,71 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 4,
+  "reload_style_on_change": true,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "backlight",
+    "pulseaudio",
+    "network",
+    "battery"
+  ],
+
+  "hyprland/workspaces": {
+  "persistent-workspaces": {
+    "eDP-1": [1,2,3,4,5,6,7,8,9,10]
+  }
+},
+
+  "clock": {
+    "format": "{:%H:%M}"
+  },
+
+  "backlight": {
+  "device": "intel_backlight",
+  "format": "{percent}% {icon}",
+  "format-icons": [
+    "󰃚 ",
+    "󰃛 ",
+    "󰃜 ",
+    "󰃝 ",
+    "󰃞 ",
+    "󰃟 ",
+    "󰃠 "
+  ],
+  "auto-icon": "󰃡",
+  "show-percent-icon": true 
+},
+
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "󰖁",
+    "format-icons": ["󰕾"]
+  },
+
+  "network": {
+	"format-wifi": "{ipaddr} {icon}",
+  "format-icons": [""],
+	"format-ethernet": "{ifname} ",
+	"format-disconnected": "",
+	"tooltip-format": "{ifname}",
+	"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+	"tooltip-format-ethernet": "{ifname} ",
+	"tooltip-format-disconnected": "Disconnected",
+	"max-length": 50
+},
+  "battery": {
+    "all": true,
+    "format": "{capacity}% {icon}",
+    "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+  }
+}
