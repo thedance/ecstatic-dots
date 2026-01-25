@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  gitEnv = builtins.fromJSON (builtins.readFile ./.env.json);
+in
 {
   home.username = "gustavo";
   home.homeDirectory = "/home/gustavo";
@@ -7,7 +10,7 @@
 
   fonts.fontconfig.enable = true;
 
-
+  nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
 
     ## TERMINAL
@@ -41,14 +44,26 @@
 
   #home.file.".icons/default/index.theme".force = true;
 
-  home.sessionVariables = { 
+  home.sessionVariables = {
   };
-
 
   imports = [
   ];
 
   programs.waybar.enable = true;
+
+  
+  
+  programs.git = {
+    enable = true;
+    # Load name/email from JSON
+    settings = {
+      user = {
+        name  = gitEnv.GIT_NAME;
+        email = gitEnv.GIT_EMAIL;
+      };
+    };
+  };
 
   # WAYBAR
   xdg.configFile."waybar/config".source = ./waybar/config;

@@ -196,12 +196,6 @@ in
 
   programs.hyprland.enable = true;
 
-  programs.git = {
-    enable = true;
-    config = {
-      push = { autoSetupRemote = true; };
-  };};
-
   /* xdg.portal = {
   enable = true;
   wlr.enable = true;
