@@ -1,5 +1,9 @@
 { pkgs, lib, myUser, env, ... }:
 
+let
+  env = builtins.fromJSON (builtins.readFile ./system.json);
+  myUser = env.USERNAME;
+in
 {
   home.username = myUser;
   home.homeDirectory = "/home/${myUser}";
@@ -32,6 +36,15 @@
     cava
     asciiquarium
     cmatrix 
+
+    htop
+    btop
+    glances
+    bastet
+    tty-clock
+    termshark
+    bluetuith
+
 
     ## GTK
     adwaita-icon-theme
