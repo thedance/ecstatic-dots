@@ -2,6 +2,8 @@
 
 let
   home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+  env = builtins.fromJSON (builtins.readFile ./system.json);
+  myUser = env.USERNAME;
 in
 {
   imports =
@@ -113,9 +115,9 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.gustavo = {
+  users.users.${myUser} = {
     isNormalUser = true;
-    description = "Gustavo Lacerda";
+    description = "";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     #packages = with pkgs; [
@@ -126,14 +128,12 @@ in
 
 
   ## HOME MANAGER
-/* 
-  home-manager.users.gustavo = import ./home.nix { pkgs, ... }: {
-    home.packages = [ pkgs.atool pkgs.httpie ];
-    programs.bash.enable = true;
-    home.stateVersion = "25.11"; 
-  }; */
-  home-manager.users.gustavo = import ./home.nix;
-  home-manager.useGlobalPkgs = true;
+  home-manager.users.${myUser} = import ./home.nix  { inherit 
+    myUser
+    env
+    pkgs
+    lib; };
+  home-manager.useGlobalPkgs = false;
   home-manager.useUserPackages = true;
 
   ## SECURITY

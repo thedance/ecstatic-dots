@@ -1,11 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, myUser, env, ... }:
 
-let
-  gitEnv = builtins.fromJSON (builtins.readFile ./.env.json);
-in
 {
-  home.username = "gustavo";
-  home.homeDirectory = "/home/gustavo";
+  home.username = myUser;
+  home.homeDirectory = "/home/${myUser}";
   home.stateVersion = "25.11";
 
   fonts.fontconfig.enable = true;
@@ -59,8 +56,8 @@ in
     # Load name/email from JSON
     settings = {
       user = {
-        name  = gitEnv.GIT_NAME;
-        email = gitEnv.GIT_EMAIL;
+        name  = env.GIT_NAME;
+        email = env.GIT_EMAIL;
       };
     };
   };
