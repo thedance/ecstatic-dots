@@ -1,6 +1,7 @@
 {
   // Very small logo
   "logo": {
+    //"source": "/home/gustavo/Pictures/clippy.png",
     "type": "small",
     "padding": {
       "top": 1,

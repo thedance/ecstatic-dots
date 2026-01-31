@@ -75,6 +75,15 @@ in
     };
   };
 
+  home.pointerCursor = {
+  gtk.enable = true;
+  x11.enable = true;
+  name = "capitaine-cursors";
+  size = 48;
+  package = pkgs.capitaine-cursors;
+};
+
+
   # WAYBAR
   xdg.configFile."waybar/config".source = ./waybar/config;
   xdg.configFile."waybar/style.css".source = lib.mkForce ./waybar/style.css;
