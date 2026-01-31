@@ -62,7 +62,6 @@ export FZF_ALT_C_COMMAND='ls -d */ 2>/dev/null'  # list only directories
 
 #export PATH="$HOME/.local/bin:$PATH"
 
-# Não perguntar sobre jobs em background ao fechar o shell
 setopt no_hup
 setopt no_nomatch
 unsetopt monitor
