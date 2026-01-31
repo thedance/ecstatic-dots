@@ -1,25 +1,33 @@
 {
-  description = "My NixOS system";
+  description = "NixOS flake with Zen Browser";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, zen-browser, ... }:
+    let
       system = "x86_64-linux";
+      hostname = "nixos"; # adjust to your hostname
+    in
+    {
+      nixosConfigurations = {
+        "${hostname}" = nixpkgs.lib.nixosSystem {
+          inherit system;
 
-      # THIS is what lets configuration.nix see `inputs`
-      specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix # your existing config
 
-      modules = [
-        ./configuration.nix
-      ];
+            # Zen Browser package
+            {
+              environment.systemPackages = [
+                zen-browser.packages.${system}.default
+              ];
+            }
+          ];
+        };
+      };
     };
-  };
 }

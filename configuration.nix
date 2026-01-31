@@ -1,7 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+  home-manager = builtins.fetchTarball {
+  url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+  sha256 = "sha256-04yamxkwdfjcz5dl8c6nayg1w6dhf325fdklbn09gymnzwzq5nml";
+  };
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
 in
@@ -155,8 +158,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     wpgtk

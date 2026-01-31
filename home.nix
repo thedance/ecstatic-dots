@@ -13,7 +13,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-
     ## TERMINAL
     fastfetch
     zsh
@@ -59,6 +58,10 @@ in
 
   imports = [
   ];
+
+  programs.zen-browser.enable = true;
+
+  
 
   programs.waybar.enable = true;
 
