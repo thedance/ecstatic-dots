@@ -3,10 +3,12 @@
 let
   home-manager = builtins.fetchTarball {
   url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  sha256 = "sha256-04yamxkwdfjcz5dl8c6nayg1w6dhf325fdklbn09gymnzwzq5nml";
   };
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
+  zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
+  inherit pkgs;
+    };
 in
 {
   imports =
@@ -157,7 +159,9 @@ in
   # $ nix search wget
 
   nixpkgs.config.allowUnfree = true;
+  
   environment.systemPackages = with pkgs; [
+    zen-browser.default 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     wpgtk

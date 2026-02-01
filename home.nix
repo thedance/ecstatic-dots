@@ -59,7 +59,6 @@ in
   imports = [
   ];
 
-  programs.zen-browser.enable = true;
 
   
 
