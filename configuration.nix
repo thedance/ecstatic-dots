@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nixos-06cb-009a-fingerprint-sensor, ... }:
 
 let
   home-manager = builtins.fetchTarball {
@@ -50,6 +50,16 @@ in
     LC_PAPER = "en_IE.UTF-8";
     LC_TELEPHONE = "en_IE.UTF-8";
     LC_TIME = "en_IE.UTF-8";
+  };
+
+    services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = nixos-06cb-009a-fingerprint-sensor.lib.libfprint-2-tod1-vfs0090-bingch {
+        calib-data-file = ./calib-data.bin;
+      };
+    };
   };
 
 /*    # Fingerprint sensor for enrollment
@@ -159,6 +169,11 @@ in
   # $ nix search wget
 
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+  "ventoy-gtk3-1.1.07"
+   "ventoy-1.1.07"
+];
   
   environment.systemPackages = with pkgs; [
     zen-browser.default 
@@ -182,6 +197,12 @@ in
     waybar
     wofi
     waypaper
+    brave
+    ventoy-full
+    ventoy-full-gtk
+
+    nautilus
+    nautilus-open-any-terminal
   ];
 
   fonts.packages = with pkgs; [

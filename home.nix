@@ -12,6 +12,7 @@ in
   fonts.fontconfig.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     ## TERMINAL
     fastfetch
@@ -23,6 +24,8 @@ in
     unrar
     git 
     pywal
+    parted
+    
 
     pkg-config
     gtk3
