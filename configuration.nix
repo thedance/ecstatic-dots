@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixos-06cb-009a-fingerprint-sensor, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   home-manager = builtins.fetchTarball {
@@ -50,16 +50,6 @@ in
     LC_PAPER = "en_IE.UTF-8";
     LC_TELEPHONE = "en_IE.UTF-8";
     LC_TIME = "en_IE.UTF-8";
-  };
-
-    services.fprintd = {
-    enable = true;
-    tod = {
-      enable = true;
-      driver = nixos-06cb-009a-fingerprint-sensor.lib.libfprint-2-tod1-vfs0090-bingch {
-        calib-data-file = ./calib-data.bin;
-      };
-    };
   };
 
 /*    # Fingerprint sensor for enrollment
@@ -199,7 +189,9 @@ in
     waypaper
     brave
     ventoy-full
-    ventoy-full-gtk
+    thunderbird
+    mailspring
+
 
     nautilus
     nautilus-open-any-terminal

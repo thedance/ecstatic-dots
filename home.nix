@@ -25,6 +25,8 @@ in
     git 
     pywal
     parted
+    fprintd
+
     
 
     pkg-config
