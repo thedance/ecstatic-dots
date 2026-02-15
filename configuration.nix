@@ -52,6 +52,34 @@ in
     LC_TIME = "en_IE.UTF-8";
   };
 
+
+  i18n.inputMethod = {
+  enable = true;
+  type = "fcitx5";
+
+  fcitx5 = {
+    waylandFrontend = true;   # Needed for Hyprland
+    ignoreUserConfig = true;  # Use these settings
+    addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk    
+    ];
+    settings = {
+      inputMethod = {
+        "Groups/0" = {
+          Name = "Default";
+          "Default Layout" = "us";
+          DefaultIM = "keyboard-us";  # Start with English
+        };
+        "Groups/0/Items/0".Name = "keyboard-us";
+        "Groups/0/Items/1".Name = "mozc";
+      };
+    };
+  };
+};
+
+
+
 /*    # Fingerprint sensor for enrollment
   services."06cb-009a-fingerprint-sensor" = {                                 
   enable = true;                                                            
@@ -164,6 +192,13 @@ in
   "ventoy-gtk3-1.1.07"
    "ventoy-1.1.07"
 ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
   
   environment.systemPackages = with pkgs; [
     zen-browser.default 
@@ -191,7 +226,8 @@ in
     ventoy-full
     thunderbird
     mailspring
-
+    steam
+    obs-studio
 
     nautilus
     nautilus-open-any-terminal
@@ -200,7 +236,34 @@ in
   fonts.packages = with pkgs; [
   nerd-fonts.jetbrains-mono
   nerd-fonts.iosevka
+  noto-fonts-cjk-sans
+  noto-fonts-cjk-serif
+  ipaexfont
+  noto-fonts
+  jetbrains-mono
+  inter
+  sarasa-gothic
 ];
+
+fonts.fontconfig.defaultFonts = {
+  serif = [
+    "DejaVu Serif"
+    "Noto Serif"
+    "Noto Serif CJK JP"
+  ];
+
+  sansSerif = [
+    "Inter"
+    "Noto Sans"
+    "Noto Sans CJK JP"
+  ];
+
+  monospace = [
+    "JetBrains Mono"
+    "Sarasa Mono J"
+    "Noto Sans Mono CJK JP"
+  ];
+};
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -210,6 +273,13 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+};
 
   programs.zsh.enable = true;   
   programs.zsh.autosuggestions.enable = true;

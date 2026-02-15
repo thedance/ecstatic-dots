@@ -25,6 +25,7 @@ alias nixedit='codium /etc/nixos && exit'
 
 alias nixos-clean="sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage"
 alias hm-clean="home-manager expire-generations +5 && nix-collect-garbage"
+alias sshs='sshs -c ~/.ssh/config'
 
 
 

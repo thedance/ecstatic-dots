@@ -26,7 +26,6 @@ in
     pywal
     parted
     fprintd
-
     
 
     pkg-config
@@ -40,6 +39,7 @@ in
     cava
     asciiquarium
     cmatrix 
+    sshs
 
     htop
     btop
