@@ -48,6 +48,12 @@ in
     tty-clock
     termshark
     bluetuith
+    chafa
+
+    ##screenshot
+    hyprshot
+    mako
+    wl-clipboard
 
 
     ## GTK
@@ -112,5 +118,8 @@ in
   ## WAYPAPER
   #xdg.configFile."waypaper/config.ini".source = ./waypaper/config.ini;
   xdg.configFile."waypaper/post.sh".source = ./waypaper/post.sh;
+
+  ## MAKO
+  xdg.configFile."mako/config".source = ./mako/config;
 
 }

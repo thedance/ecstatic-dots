@@ -211,6 +211,7 @@ in
     networkmanager
     wpa_supplicant
     lxqt.lxqt-policykit
+    obsidian
 
         ## APPS
     discord
@@ -228,6 +229,7 @@ in
     mailspring
     steam
     obs-studio
+    seafile-client
 
     nautilus
     nautilus-open-any-terminal
