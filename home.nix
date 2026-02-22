@@ -104,6 +104,7 @@ in
   # PYWAL
   xdg.configFile."wal/templates/colors-gtk.css".source = ./wal/templates/colors-gtk.css;
   xdg.configFile."wal/templates/hyprland.conf".source = ./wal/templates/hyprland.conf;
+  xdg.configFile."wal/templates/mako".source = ./wal/templates/mako;
 
   ## TERMINAL
   xdg.configFile."fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
@@ -120,6 +121,5 @@ in
   xdg.configFile."waypaper/post.sh".source = ./waypaper/post.sh;
 
   ## MAKO
-  xdg.configFile."mako/config".source = ./mako/config;
-
+  xdg.symlink."mako/config" = "/home/${myUser}/.cache/wal/mako";
 }
