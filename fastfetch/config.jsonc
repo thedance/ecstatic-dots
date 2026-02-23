@@ -1,7 +1,8 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "small"
+        "type": "file",
+        "source": "/etc/nixos/fastfetch/nazuna.txt"
     },
     "display": {
         "separator": "  ",

@@ -9,4 +9,6 @@ IMG=$(find "$WALLS" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpe
 [ -n "$IMG" ] && {
     swww img "$IMG" --transition-step 5 --transition-fps 60
     wal -i "$IMG"
+    makoctl reload
+    pywalfox update
 }

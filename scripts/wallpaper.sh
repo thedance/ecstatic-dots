@@ -19,4 +19,6 @@ SELECTED=$(fzf --height 90% --layout=reverse --exact --cycle \
 if [ -n "$SELECTED" ]; then
     swww img "$SELECTED"
     wal -i "$SELECTED"
+    makoctl reload
+    pywalfox update
 fi

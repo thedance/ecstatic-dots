@@ -112,6 +112,9 @@ in
 
   ## ZSH
   home.file.".zshrc".source = ./zsh/.zshrc;
+  
+  # FIREFOX
+  home.file.".mozilla/firefox/1gir5vgc.default/chrome/userChrome.css".source = ./firefox/userChrome.css;
 
   ## HYPRLAND
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
@@ -120,6 +123,12 @@ in
   #xdg.configFile."waypaper/config.ini".source = ./waypaper/config.ini;
   xdg.configFile."waypaper/post.sh".source = ./waypaper/post.sh;
 
-  ## MAKO
-  xdg.symlink."mako/config" = "/home/${myUser}/.cache/wal/mako";
+
+  services.mako = {
+  enable = true;
+
+  extraConfig = ''
+    include=/home/${myUser}/.cache/wal/mako
+  '';
+};
 }

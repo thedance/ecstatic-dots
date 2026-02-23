@@ -6,9 +6,9 @@ let
   };
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
-  zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
-  inherit pkgs;
-    };
+  #zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
+  #inherit pkgs;
+  #  };
 in
 {
   imports =
@@ -201,7 +201,7 @@ in
   ];
   
   environment.systemPackages = with pkgs; [
-    zen-browser.default 
+    #zen-browser.default 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     wpgtk
@@ -230,6 +230,7 @@ in
     steam
     obs-studio
     seafile-client
+
 
     nautilus
     nautilus-open-any-terminal
@@ -287,6 +288,8 @@ fonts.fontconfig.defaultFonts = {
   programs.zsh.autosuggestions.enable = true;
 
   programs.hyprland.enable = true;
+
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
 
   /* xdg.portal = {
   enable = true;
