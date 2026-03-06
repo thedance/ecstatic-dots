@@ -88,37 +88,25 @@ panelmultiview {
    Floating minimal nav/search
    ---------------------------- */
 
-/* Remove tab bar */
+/* Hide the tab bar completely */
 #TabsToolbar {
   display: none !important;
 }
 
-/* Nav bar off-screen initially */
-#nav-bar {
+/* Move entire navigator toolbox (nav bar + urlbar + bookmarks + buttons) off-screen */
+#navigator-toolbox {
   position: absolute !important;
-  top: -100px !important;      /* completely hidden above window */
+  top: -120px !important;        /* fully above viewport */
   left: 0 !important;
   right: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: hidden !important;
-  transition: top 0.25s ease !important;
-  z-index: 9999 !important;     /* float above page */
+  transition: top 0.25s ease !important; /* smooth slide down */
+  z-index: 9999 !important;
+  overflow: visible !important;  /* so child elements are not clipped */
 }
 
-
-
-/* URL/search bar container */
-#urlbar-container,
-#urlbar,
-#nav-bar-customization-target {
-  padding: 2px 6px !important;
-  margin: 0 !important;
-}
-
-/* Slide down the entire nav bar on focus */
-#nav-bar:focus-within {
-  top: 0 !important;           /* brings entire nav bar into view */
+/* Slide down the entire bar when any element inside it is focused */
+#navigator-toolbox:focus-within {
+  top: 0 !important;              /* bring everything into view */
 }
 
 /* Optional: compact search dropdown */
@@ -133,8 +121,4 @@ panelmultiview {
 
 .urlbarView-title {
   font-size: 12px !important;
-}
-
-* {
-  border-radius: 0px !important;
 }

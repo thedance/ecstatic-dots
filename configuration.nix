@@ -103,6 +103,8 @@ in
   settings.default_session.command = "Hyprland";
 };
 
+  services.flatpak.enable = true;
+
    /* ## FINGERPRINT
   # Standard fprintd (required for PAM to see the device)
   services.fprintd.enable = lib.mkForce true; */
@@ -230,6 +232,10 @@ in
     steam
     obs-studio
     seafile-client
+    anki
+    mokuro
+    spotify
+    qbittorrent
 
 
     nautilus
@@ -319,6 +325,8 @@ fonts.fontconfig.defaultFonts = {
     };
   };
 };
+
+    programs.nix-ld.enable = true;
 
   
   

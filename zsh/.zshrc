@@ -24,6 +24,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'   # gray color
 alias nixedit='codium /etc/nixos && exit'
 
 alias nixos-clean="sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system && sudo nix-collect-garbage"
+alias empty-trash="rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*"
 alias hm-clean="home-manager expire-generations +5 && nix-collect-garbage"
 alias sshs='sshs -c ~/.ssh/config'
 alias random="/etc/nixos/scripts/random.sh"

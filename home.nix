@@ -49,6 +49,10 @@ in
     termshark
     bluetuith
     chafa
+    steamtinkerlaunch
+    p7zip
+    dua
+    ncdu
 
     ##screenshot
     hyprshot
