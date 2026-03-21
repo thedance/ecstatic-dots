@@ -28,6 +28,7 @@ alias empty-trash="rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info
 alias hm-clean="home-manager expire-generations +5 && nix-collect-garbage"
 alias sshs='sshs -c ~/.ssh/config'
 alias random="/etc/nixos/scripts/random.sh"
+alias japanese="/etc/nixos/scripts/japanese.sh"
 
 
 

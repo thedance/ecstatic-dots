@@ -58,6 +58,8 @@ in
     hyprshot
     mako
     wl-clipboard
+    zip
+    ddrescue
 
 
     ## GTK

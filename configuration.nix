@@ -37,7 +37,7 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Dublin";
 
-  # Select internationalisation properties.
+/*   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -50,8 +50,28 @@ in
     LC_PAPER = "en_IE.UTF-8";
     LC_TELEPHONE = "en_IE.UTF-8";
     LC_TIME = "en_IE.UTF-8";
-  };
+  }; */
 
+  # JAPANESE
+  i18n.defaultLocale = "ja_JP.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "ja_JP.UTF-8";
+    LC_IDENTIFICATION = "ja_JP.UTF-8";
+    LC_MEASUREMENT = "ja_JP.UTF-8";
+    LC_MONETARY = "ja_JP.UTF-8";
+    LC_NAME = "ja_JP.UTF-8";
+    LC_NUMERIC = "ja_JP.UTF-8";
+    LC_PAPER = "ja_JP.UTF-8";
+    LC_TELEPHONE = "ja_JP.UTF-8";
+    LC_TIME = "ja_JP.UTF-8";
+    };
+
+
+  environment.sessionVariables = {
+    LANG = "ja_JP.UTF-8";
+    LC_ALL = "ja_JP.UTF-8";
+  };
 
   i18n.inputMethod = {
   enable = true;
@@ -179,8 +199,10 @@ in
   security.polkit.enable = true;
 
   # Install firefox.
-  # programs.firefox.enable = true;
-
+  programs.firefox = {
+  enable = true;
+  languagePacks = [ "ja" ];
+  };
   ## Allow unfree
 
 
@@ -239,6 +261,7 @@ in
 
 
     nautilus
+    kdePackages.dolphin
     nautilus-open-any-terminal
   ];
 
