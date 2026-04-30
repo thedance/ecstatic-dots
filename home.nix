@@ -25,8 +25,7 @@ in
     git 
     pywal
     parted
-    fprintd
-    
+    fprintd    
 
     pkg-config
     gtk3
@@ -60,7 +59,25 @@ in
     wl-clipboard
     zip
     ddrescue
-
+    pavucontrol
+    wine
+    winetricks
+    ffmpeg
+    ani-cli
+    hakuneko
+    anime-downloader
+    openvpn
+    animdl
+    upower
+    tlp
+    powertop
+    android-tools
+    ffsubsync
+    mpv
+    imagemagick
+    libjpeg
+    libpng
+    #imagemagick6
 
     ## GTK
     adwaita-icon-theme

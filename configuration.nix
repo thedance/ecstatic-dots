@@ -24,6 +24,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.extraModprobeConfig = ''
+  options psmouse sensitivity=140 speed=120
+  '';
+
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -37,7 +41,7 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Dublin";
 
-/*   # Select internationalisation properties.
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -50,9 +54,9 @@ in
     LC_PAPER = "en_IE.UTF-8";
     LC_TELEPHONE = "en_IE.UTF-8";
     LC_TIME = "en_IE.UTF-8";
-  }; */
+  };
 
-  # JAPANESE
+/*   # JAPANESE
   i18n.defaultLocale = "ja_JP.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -72,7 +76,7 @@ in
     LANG = "ja_JP.UTF-8";
     LC_ALL = "ja_JP.UTF-8";
   };
-
+ */
   i18n.inputMethod = {
   enable = true;
   type = "fcitx5";
@@ -125,6 +129,22 @@ in
 
   services.flatpak.enable = true;
 
+  services.tlp.enable = true;
+
+  systemd.services.local-webapp = {
+  description = "Local HTML Web App Server";
+  after = [ "network.target" ];
+  wantedBy = [ "multi-user.target" ];
+
+  serviceConfig = {
+    ExecStart = "${pkgs.python3}/bin/python -m http.server 8000 --directory /home/gustavo/.config/mpv";
+    Restart = "always";
+    User = "gustavo";
+    WorkingDirectory = "/home/gustavo/.config/mpv";
+  };
+};
+
+
    /* ## FINGERPRINT
   # Standard fprintd (required for PAM to see the device)
   services.fprintd.enable = lib.mkForce true; */
@@ -133,6 +153,17 @@ in
   security.pam.services.login.fprintAuth = true;
   security.pam.services.sudo.fprintAuth = true;
 
+  services.logind.settings.Login = {
+  HandleLidSwitch = "ignore";
+  HandleLidSwitchExternalPower = "ignore";
+
+  IdleAction = "ignore";
+  IdleActionSec = 0;
+};
+
+services.jellyfin = {
+  enable = true;
+};
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -181,6 +212,16 @@ in
     #];
   };
 
+  ## JELLYFIN
+  users.users.jellyfin.extraGroups = [ "users" ];
+
+  systemd.tmpfiles.rules = [
+  "d /home/${myUser}/Videos/mkv 0755 gustavo users -"
+];
+
+  systemd.services.jellyfin.serviceConfig = {
+  SupplementaryGroups = [ "users" ];
+};
 
   ## HOME MANAGER
   home-manager.users.${myUser} = import ./home.nix  { inherit 
@@ -203,7 +244,16 @@ in
   enable = true;
   languagePacks = [ "ja" ];
   };
-  ## Allow unfree
+
+/* programs.brave-browser = {
+  enable = true;
+  # Enable proprietary codecs
+  extraOpts = {
+    "AllowsCompositing" = true;
+    "EnableWidevine" = true;
+  };
+}; */
+
 
 
 
@@ -215,6 +265,7 @@ in
   nixpkgs.config.permittedInsecurePackages = [
   "ventoy-gtk3-1.1.07"
    "ventoy-1.1.07"
+    "imagemagick-6.9.13-10"
 ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -258,6 +309,15 @@ in
     mokuro
     spotify
     qbittorrent
+    openvpn3
+    ffmpeg-full
+    vlc
+
+      libva
+  libva-utils
+  intel-media-driver
+  intel-vaapi-driver
+    
 
 
     nautilus
@@ -320,6 +380,7 @@ fonts.fontconfig.defaultFonts = {
 
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
 
+
   /* xdg.portal = {
   enable = true;
   wlr.enable = true;
@@ -348,6 +409,12 @@ fonts.fontconfig.defaultFonts = {
     };
   };
 };
+
+
+  hardware.graphics = {
+  enable = true;
+  enable32Bit = true;
+  };
 
     programs.nix-ld.enable = true;
 
