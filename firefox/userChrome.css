@@ -94,15 +94,15 @@ panelmultiview {
 }
 
 /* Move entire navigator toolbox (nav bar + urlbar + bookmarks + buttons) off-screen */
-#navigator-toolbox {
+/* #navigator-toolbox {
   position: absolute !important;
-  top: -120px !important;        /* fully above viewport */
+  top: -120px !important;      
   left: 0 !important;
   right: 0 !important;
-  transition: top 0.25s ease !important; /* smooth slide down */
+  transition: top 0.25s ease !important;
   z-index: 9999 !important;
-  overflow: visible !important;  /* so child elements are not clipped */
-}
+  overflow: visible !important; 
+} */
 
 /* Slide down the entire bar when any element inside it is focused */
 #navigator-toolbox:focus-within {

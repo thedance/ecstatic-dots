@@ -78,6 +78,9 @@ in
     libjpeg
     libpng
     #imagemagick6
+    wallust
+    peaclock
+    termdown
 
     ## GTK
     adwaita-icon-theme

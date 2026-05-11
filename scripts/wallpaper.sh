@@ -18,7 +18,7 @@ SELECTED=$(fzf --height 90% --layout=reverse --exact --cycle \
 # Apply wallpaper and pywal
 if [ -n "$SELECTED" ]; then
     swww img "$SELECTED"
-    wal -i "$SELECTED"
+    wallust run "$SELECTED"
     makoctl reload
     pywalfox update
 fi

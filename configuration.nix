@@ -6,9 +6,9 @@ let
   };
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
-  #zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
-  #inherit pkgs;
-  #  };
+  zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
+  inherit pkgs;
+    };
 in
 {
   imports =
@@ -26,6 +26,7 @@ in
 
   boot.extraModprobeConfig = ''
   options psmouse sensitivity=140 speed=120
+  options btusb enable_autosuspend=n
   '';
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -276,7 +277,7 @@ services.jellyfin = {
   ];
   
   environment.systemPackages = with pkgs; [
-    #zen-browser.default 
+    zen-browser.default 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     wpgtk
@@ -287,6 +288,7 @@ services.jellyfin = {
     wpa_supplicant
     lxqt.lxqt-policykit
     obsidian
+    ungoogled-chromium
 
         ## APPS
     discord
