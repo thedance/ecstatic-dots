@@ -30,7 +30,27 @@ alias sshs='sshs -c ~/.ssh/config'
 alias random="/etc/nixos/scripts/random.sh"
 alias japanese="/etc/nixos/scripts/japanese.sh"
 
+checktrack() {
+  ffprobe -v error \
+    -select_streams a \
+    -show_entries stream=index:stream_tags=language \
+    -of csv=p=0 \
+    "$1"
+}
 
+condense() {
+  ~/Videos/Tools/subs2cia/subs2cia/.venv/bin/python \
+    ~/Videos/Tools/subs2cia/subs2cia/main.py condense \
+    -i ./*.mkv \
+    -b \
+    -m \
+    -ai "$1" \
+    -si 0 \
+    -c 0 \
+    -Q \
+    --no-gen-subtitle \
+    -M
+}
 
 # Run FastFetch automatically when opening a terminal
 # Run fastfetch only for interactive shells
@@ -45,7 +65,7 @@ bindkey '^[f' forward-word
 
 
 # --- FZF setup for NixOS ---
-export FZF_DEFAULT_OPTS="--height 40% --border --reverse"
+#export FZF_DEFAULT_OPTS="--height 40% --border --reverse"
 
 # Source the key bindings directly
 if [ -f /nix/store/bw12xvv5brgqz5j1nm58jhfyxsqyi7sz-fzf-0.67.0/share/fzf/key-bindings.zsh ]; then
@@ -53,14 +73,11 @@ if [ -f /nix/store/bw12xvv5brgqz5j1nm58jhfyxsqyi7sz-fzf-0.67.0/share/fzf/key-bin
 fi
 
 # Optional: Ctrl+T previews for files (install bat for preview)
-# Ctrl+T uses only the current folder (ls) instead of recursive find
+# trl+T uses only the current folder (ls) instead of recursive find
 export FZF_CTRL_T_COMMAND='ls -A'   # -A hides . and .., shows all other files
 
 export EDITOR="codium --wait"
 export VISUAL="codium --wait"
-
-# Optional: Alt+C previews for directories
-export FZF_ALT_C_COMMAND='ls -d */ 2>/dev/null'  # list only directories
 
 #export PATH="$HOME/.local/bin:$PATH"
 

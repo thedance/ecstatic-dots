@@ -52,7 +52,7 @@ in
     p7zip
     dua
     ncdu
-
+    yt-dlp
     ##screenshot
     hyprshot
     mako
@@ -81,6 +81,7 @@ in
     wallust
     peaclock
     termdown
+  
 
     ## GTK
     adwaita-icon-theme
@@ -121,6 +122,11 @@ in
   size = 48;
   package = pkgs.capitaine-cursors;
 };
+
+  xdg.mimeApps.defaultApplications = {
+  "application/x-msdownload" = "wine.desktop";
+  "application/octet-stream" = "wine.desktop";
+  };
 
 
   # WAYBAR

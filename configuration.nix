@@ -57,8 +57,8 @@ in
     LC_TIME = "en_IE.UTF-8";
   };
 
-/*   # JAPANESE
-  i18n.defaultLocale = "ja_JP.UTF-8";
+  # JAPANESE
+/*   i18n.defaultLocale = "ja_JP.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ja_JP.UTF-8";
@@ -76,8 +76,8 @@ in
   environment.sessionVariables = {
     LANG = "ja_JP.UTF-8";
     LC_ALL = "ja_JP.UTF-8";
-  };
- */
+  }; */
+
   i18n.inputMethod = {
   enable = true;
   type = "fcitx5";
@@ -314,6 +314,8 @@ services.jellyfin = {
     openvpn3
     ffmpeg-full
     vlc
+    wineWowPackages.stable
+    bottles
 
       libva
   libva-utils
@@ -426,7 +428,7 @@ fonts.fontconfig.defaultFonts = {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
