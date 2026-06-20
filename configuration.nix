@@ -1,11 +1,12 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball {
-  url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
-  };
-  env = builtins.fromJSON (builtins.readFile ./system.json);
-  myUser = env.USERNAME;
+  #home-manager = builtins.fetchTarball {
+  #url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+  #};
+  #env = builtins.fromJSON (builtins.readFile ./system.json);
+  #myUser = env.USERNAME;
+  myUser = "gustavo";
   /* zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
   inherit pkgs;
     }; */
@@ -14,8 +15,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
-        inputs.spicetify-nix.nixosModules.spicetify
+      #(import "${home-manager}/nixos")
+      #inputs.spicetify-nix.nixosModules.spicetify
     ];
 
    nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -241,7 +242,7 @@ services.jellyfin = {
   ## HOME MANAGER
   home-manager.users.${myUser} = import ./home.nix  { inherit 
     myUser
-    env
+    #env
     pkgs
     lib; };
   home-manager.useGlobalPkgs = false;
@@ -280,6 +281,7 @@ services.jellyfin = {
   nixpkgs.config.permittedInsecurePackages = [
   "ventoy-gtk3-1.1.07"
    "ventoy-1.1.07"
+    "ventoy-1.1.10"
     "imagemagick-6.9.13-10"
 ];
 

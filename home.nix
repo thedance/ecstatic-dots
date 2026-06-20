@@ -1,11 +1,7 @@
-{ pkgs, lib, myUser, env, ... }:
+{ pkgs, lib, myUser, ... }:
 
 let
-  env = builtins.fromJSON (builtins.readFile ./system.json);
-  myUser = env.USERNAME;
-    spicetify = spicetify-nix.lib.mkSpicetify pkgs {
-    #config options
-  };
+  myUser = "gustavo";
 in
 {
   home.username = myUser;
@@ -136,11 +132,10 @@ in
   
   programs.git = {
     enable = true;
-    # Load name/email from JSON
     settings = {
       user = {
-        name  = env.GIT_NAME;
-        email = env.GIT_EMAIL;
+        name  = "thedance";
+        email = "lsbgustavo@gmail.com";
       };
     };
   };
