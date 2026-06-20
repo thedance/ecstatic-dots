@@ -1,0 +1,1 @@
+inputs.spicetify-nix.url = "github:Gerg-L/spicetify-nix";

@@ -3,6 +3,9 @@
 let
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
+    spicetify = spicetify-nix.lib.mkSpicetify pkgs {
+    #config options
+  };
 in
 {
   home.username = myUser;
@@ -121,7 +124,7 @@ in
     LD_LIBRARY_PATH = "${pkgs.portaudio}/lib";
   };
 
-  imports = [
+  imports = [ 
   ];
 
 

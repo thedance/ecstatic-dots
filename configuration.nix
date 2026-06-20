@@ -15,6 +15,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       (import "${home-manager}/nixos")
+        inputs.spicetify-nix.nixosModules.spicetify
     ];
 
    nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -330,7 +331,7 @@ services.jellyfin = {
     seafile-client
     anki
     mokuro
-    spotify
+    #spotify
     qbittorrent
     openvpn3
     ffmpeg-full
@@ -345,7 +346,8 @@ services.jellyfin = {
   intel-vaapi-driver
 
   qemu
-    
+
+  nodejs
 
 
     nautilus
@@ -462,6 +464,11 @@ fonts.fontconfig.defaultFonts = {
     mesa
     libglvnd
   ];
+  };
+
+    programs.spicetify = {
+  enable = true;
+  #config options
   };
 
   programs.nix-ld.enable = true;
