@@ -13,7 +13,13 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+
+
   home.packages = with pkgs; [
+
+    (pkgs.python3.withPackages (ps: with ps; [
+      sounddevice
+    ]))
     ## TERMINAL
     fastfetch
     zsh
@@ -25,7 +31,23 @@ in
     git 
     pywal
     parted
-    fprintd    
+    fprintd  
+
+    ##MINER
+     ffmpeg
+    steam-run
+    xclip
+    libevdev
+    fuse2 
+    python313Packages.pip
+    python313Packages.uv
+    python313Packages.pyqt6
+    portaudio
+
+    jq
+    appimage-run
+    ruby
+    micro
 
     pkg-config
     gtk3
@@ -81,6 +103,10 @@ in
     wallust
     peaclock
     termdown
+
+      fuse
+  fuse3
+  appimage-run
   
 
     ## GTK
@@ -92,6 +118,7 @@ in
   #home.file.".icons/default/index.theme".force = true;
 
   home.sessionVariables = {
+    LD_LIBRARY_PATH = "${pkgs.portaudio}/lib";
   };
 
   imports = [

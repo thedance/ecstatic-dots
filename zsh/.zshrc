@@ -29,6 +29,7 @@ alias hm-clean="home-manager expire-generations +5 && nix-collect-garbage"
 alias sshs='sshs -c ~/.ssh/config'
 alias random="/etc/nixos/scripts/random.sh"
 alias japanese="/etc/nixos/scripts/japanese.sh"
+alias del_except_mp3='find . -type f ! -name "*.mp3" -delete'
 
 checktrack() {
   ffprobe -v error \
@@ -47,7 +48,6 @@ condense() {
     -ai "$1" \
     -si 0 \
     -c 0 \
-    -Q \
     --no-gen-subtitle \
     -M
 }

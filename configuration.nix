@@ -6,9 +6,9 @@ let
   };
   env = builtins.fromJSON (builtins.readFile ./system.json);
   myUser = env.USERNAME;
-  zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
+  /* zen-browser = import (builtins.fetchTarball "https://github.com/youwen5/zen-browser-flake/archive/master.tar.gz") {
   inherit pkgs;
-    };
+    }; */
 in
 {
   imports =
@@ -76,7 +76,7 @@ in
   environment.sessionVariables = {
     LANG = "ja_JP.UTF-8";
     LC_ALL = "ja_JP.UTF-8";
-  }; */
+  };  */
 
   i18n.inputMethod = {
   enable = true;
@@ -145,6 +145,19 @@ in
   };
 };
 
+systemd.services.textractor-web = {
+  description = "Textractor HTML Server";
+  after = [ "network.target" ];
+  wantedBy = [ "multi-user.target" ];
+
+  serviceConfig = {
+    ExecStart = "${pkgs.python3}/bin/python -m http.server 8001 --directory /home/gustavo/Games/Textractor-5.2.0";
+    Restart = "always";
+    User = "gustavo";
+    WorkingDirectory = "/home/gustavo/Games/Textractor-5.2.0";
+  };
+};
+
 
    /* ## FINGERPRINT
   # Standard fprintd (required for PAM to see the device)
@@ -161,10 +174,10 @@ in
   IdleAction = "ignore";
   IdleActionSec = 0;
 };
-
+/* 
 services.jellyfin = {
   enable = true;
-};
+}; */
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -214,7 +227,7 @@ services.jellyfin = {
   };
 
   ## JELLYFIN
-  users.users.jellyfin.extraGroups = [ "users" ];
+/*   users.users.jellyfin.extraGroups = [ "users" ];
 
   systemd.tmpfiles.rules = [
   "d /home/${myUser}/Videos/mkv 0755 gustavo users -"
@@ -222,7 +235,7 @@ services.jellyfin = {
 
   systemd.services.jellyfin.serviceConfig = {
   SupplementaryGroups = [ "users" ];
-};
+}; */
 
   ## HOME MANAGER
   home-manager.users.${myUser} = import ./home.nix  { inherit 
@@ -277,11 +290,19 @@ services.jellyfin = {
   ];
   
   environment.systemPackages = with pkgs; [
-    zen-browser.default 
+    #zen-browser.default 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     wpgtk
     python3
+    python311
+    mesa
+    libGL
+    libglvnd
+    gcc.cc.lib
+    stdenv.cc.cc.lib
+    libgcc
+
     networkmanagerapplet         
     trayer             
     networkmanager
@@ -315,12 +336,15 @@ services.jellyfin = {
     ffmpeg-full
     vlc
     wineWowPackages.stable
-    bottles
+    #bottles
+    distrobox
 
-      libva
+  libva
   libva-utils
   intel-media-driver
   intel-vaapi-driver
+
+  qemu
     
 
 
@@ -361,6 +385,14 @@ fonts.fontconfig.defaultFonts = {
   ];
 };
 
+  virtualisation.podman = {
+  enable = true;
+  dockerCompat = true;
+};
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -392,6 +424,7 @@ fonts.fontconfig.defaultFonts = {
 }; */
 
 
+
   hardware.bluetooth = {
   enable = true;
   powerOnBoot = true;
@@ -418,9 +451,77 @@ fonts.fontconfig.defaultFonts = {
   hardware.graphics = {
   enable = true;
   enable32Bit = true;
+
+
+  extraPackages = with pkgs; [
+    mesa
+    libglvnd
+  ];
+
+  extraPackages32 = with pkgs.pkgsi686Linux; [
+    mesa
+    libglvnd
+  ];
   };
 
-    programs.nix-ld.enable = true;
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+  cups
+  libgbm
+  mesa
+  mesa.drivers
+  libxkbcommon
+  xorg.libXi
+  xorg.libXtst
+  xorg.libXScrnSaver
+  xorg.libxshmfence
+  xorg.libXinerama
+  libuuid
+  libsecret
+  udev
+  libnotify
+  libappindicator-gtk3
+  pciutils
+  portaudio
+  stdenv.cc.cc.lib
+  zlib
+  libGL
+  fontconfig
+  freetype
+  qt6.qtbase
+  qt6.qtwayland
+  glib
+  gtk3
+  nss
+  nspr
+  dbus
+  expat
+  cairo
+  pango
+  atk
+  at-spi2-atk
+  libdrm
+  alsa-lib
+  xorg.libX11
+  xorg.libXrandr
+  xorg.libXcomposite
+  xorg.libXdamage
+  xorg.libXext
+  xorg.libXfixes
+  xorg.libxcb
+  xorg.libXcursor
+  xorg.libXrender
+];
+   /*  ffmpeg
+    steam-run
+    xclip
+    libevdev
+    fuse2 
+    python313Packages.pip
+    python313Packages.uv
+    python313Packages.pyqt6
+    portaudio */
 
   
   
