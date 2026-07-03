@@ -102,6 +102,9 @@ in
     wallust
     peaclock
     termdown
+    libnotify
+
+    yt-dlp
 
       fuse
   fuse3

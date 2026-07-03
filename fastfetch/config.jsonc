@@ -1,8 +1,8 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "file",
-        "source": "/etc/nixos/fastfetch/eyes.txt"
+        "type": "small"
+       /*  "source": "/etc/nixos/fastfetch/eyes.txt" */
     },
     "display": {
         "separator": "  ",
@@ -29,7 +29,7 @@
         "os",
         "kernel",
         "memory",
-        "packages",
+        /* "packages", */
         "uptime",
         {
             "type": "colors",

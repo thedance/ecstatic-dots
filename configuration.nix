@@ -428,6 +428,14 @@ fonts.fontconfig.defaultFonts = {
 }; */
 
 
+swapDevices = [
+  {
+    device = "/swapfile";
+    size = 8 * 1024; # 8GB swap (in MB)
+  }
+];
+
+
 
   hardware.bluetooth = {
   enable = true;
